@@ -1,0 +1,53 @@
+<main class="homepage">
+
+  <main class="content">
+
+    <h1>Welcome!!!</h1>
+
+    <div class="row">
+
+      <br/><button class="btn" (click)="openForm()">Add Entry</button><br/>
+
+    <div class="form-popup" id="myForm">
+      <form class="form-container" action="/action_page.php">
+        <h1>Enter the Data</h1>
+
+        <label for="date"><b>Date</b></label>
+        <input type="text" placeholder="MM/DD/YYYY" name="date" required>
+
+        <label for="title"><b>Title</b></label>
+        <input type="text" placeholder="Money spent on?" name="title" required>
+
+        <label for="budget"><b>Budget</b></label>
+        <input type="text" placeholder="Amount money spend" name="budget" required>
+
+        <button type="submit" class="addbtn" (click)="addEntry()">Add</button>
+        <button type="button" class="btncancel" (click)="closeForm()">Close</button>
+      </form>
+    </div>
+
+    <button class="btn" (click)="openPie()">Pie Chart</button><br/>
+    <button class="btn" (click)="openBar()">Bar Graph</button><br/>
+
+  </div>
+
+  <div class="main">
+    <!--This is an 'article' Schematic Change-->
+    <article class="chart-box" id="holder">
+    </article>
+
+
+    <!--<script>
+      function openForm() {
+        document.getElementById("myForm").style.display = "block";
+      }
+
+      function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+      }
+    </script>-->
+
+  </div>
+  </main>
+
+</main>
