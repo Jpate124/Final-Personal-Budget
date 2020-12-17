@@ -9,6 +9,9 @@ import { User } from '../_models/user/user.module';
   providedIn: 'root'
 })
 export class AuthenticationService {
+  getCurrentUserValue() {
+    throw new Error('Method not implemented.');
+  }
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
   selector: 'pb-menu',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor (private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
-
+  logout() {
+    this.authenticationService.logout();
+  }
+  getAuthenticatedUser() {
+    return this.authenticationService.currentUserValue;
+  }
 }

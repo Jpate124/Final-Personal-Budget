@@ -48,18 +48,16 @@ export class SignupComponent implements OnInit {
     }
 
     this.loading = true;
-    console.log(this.registerForm.value);
     this.userService.register(this.registerForm.value)
-        .subscribe(
-            data => {
-                this.alertService.success('Registration successful', true);
-                this.router.navigate(['/login']);
-            },
-            error => {
-                this.alertService.error(error);
-                this.loading = false;
-            });
-}
+      .subscribe(
+          data => {
+              this.alertService.success('Registration successful', true);
+              this.router.navigate(['/login']);
 
-
+          },
+          error => {
+              this.alertService.error(error);
+              this.loading = false;
+          });
+  }
 }

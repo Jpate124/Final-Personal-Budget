@@ -14,7 +14,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: '',
+    path: 'homepage',
     component: HomepageComponent,
     //pathMatch: 'full'
   },
@@ -28,7 +28,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'homepage',
+    redirectTo: 'welcome',
     pathMatch: 'full'
   },
   {
