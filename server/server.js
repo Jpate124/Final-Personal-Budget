@@ -19,79 +19,53 @@ var connection = mysql.createConnection({
     database : 'sql9381593'
 })
 
-// app.get('/',async (req, res) => {
-//     connection.connect();
-//     connection.query('SELECT * FROM user', function (error, results, fields) {
-//         connection.end();
-//         if (error) throw error;
-//         res.json(results);
-//     });
-        
-// });
-
-app.get('/',async (req, res) => {
-    connection.connect();
-    connection.query('INSERT `Final Budget`', function (error, results, fields) {
-        connection.end();
-        if (error) throw error;
-        res.json(results);
-    });
-        
-});
-
-app.get('/',async (req, res) => {
-    connection.connect();
-    connection.query('SELECT * FROM `Final Budget`', function (error, results, fields) {
-        connection.end();
-        if (error) throw error;
-        res.json(results);
-    });
-        
-});
-
-
-// Trying to read from the budget-data.json file
 const budget = require ("./budget");
 const users = require ("./signup");
 
-app.get('/budget', (req, res) => {
-    res.json(budget);
+app.post('/budget', (req, res) => {
+    const userId = req.body.userId;
+    try {
+        connection.query('SELECT * FROM Budget Where userId = ?', userId, function (error, results, fields) {
+        if (error) throw error;
+            console.log(results);
+            res.json(results);
+        });
+     } catch (e) {
+        console.log(e);
+     }
 });
 
-app.post('/api/signup', (req, res) => {
-    const {name, username, password} = req.body;
-    console.log('This is me', name, username);
-    connection.connect();
+app.post('/add/budget', (req, res) => {
+    const {date, title, budget} = req.body[0];
+    const userId = req.body[1];
     try {
-        connection.query('INSERT INTO user (name, username, password) VALUES (?, ?, ?)', [name, username, password], function (error, results, fields) {
-            connection.end();
+        connection.query('INSERT INTO Budget (date, title, budget, userId) VALUES (?, ?, ?, ?)', [date, title, budget, userId], function (error, results, fields) {
             if (error) throw error;
             res.json(results);
         });    
     } catch (e) {
         console.log(e);
     }
-    res.status(200).json({
-        status: 'succes',
-        data: req.body,
-      })
+});
+
+app.post('/api/signup', (req, res) => {
+    const {name, username, password} = req.body;
+    try {
+        connection.query('INSERT INTO user (name, username, password) VALUES (?, ?, ?)', [name, username, password], function (error, results, fields) {
+            if (error) throw error;
+            res.json(results);
+        });    
+    } catch (e) {
+        console.log(e);
+    }
 });
 
 app.post('/api/login', (req, res) => {
     const {username, password} = req.body;
-    console.log('This is me', username, password);
-    connection.connect();
-    connection.query('SELECT * FROM `user` ', function (error, results, fields) {
-        connection.end();
+    connection.query('SELECT * FROM `user` Where username = ? and password = ?', [username, password], function (error, results, fields) {
         if (error) throw error;
         res.json(results);
     });
-});
-
-
-
-app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname, 'login.component.html'))
 });
 
 app.listen(port, () => {
