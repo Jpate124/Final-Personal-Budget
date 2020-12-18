@@ -112,7 +112,7 @@ export class HomepageComponent implements OnInit {
   }
 
   addEntry() {
-    this.http.post('http://localhost:3000/add/budget', [this.addBudgetEntryForm.value, this.currentUser]).subscribe(
+    this.http.post('http://157.230.218.151:3000/add/budget', [this.addBudgetEntryForm.value, this.currentUser]).subscribe(
       data => {
           this.alertService.success('budgetAdded successful', true);
           this.getBudgetData();
