@@ -80,7 +80,7 @@ app.post('/api/login', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`API served at http://localhost:${port}`)
+    console.log(`API served at http://157.230.218.151:${port}`)
 });
 
 
