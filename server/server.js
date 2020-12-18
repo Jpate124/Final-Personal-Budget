@@ -20,9 +20,6 @@ var connection = mysql.createConnection({
     database : 'sql9381593'
 })
 
-const budget = require ("./budget");
-const users = require ("./signup");
-
 const secretKey = 'My super secret key';
 const jwtMW = exjwt({
     secret: secretKey,
