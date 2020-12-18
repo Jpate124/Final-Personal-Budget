@@ -74,6 +74,13 @@ export class HomepageComponent implements OnInit {
     }
   }
 
+  deletePolarArea() {
+    if (document.contains(document.getElementById('polarHolder'))){
+      let obj = document.getElementById('polarHolder');
+      obj.parentNode.removeChild(obj);
+    }
+  }
+
   createChart(): void {
     let ctx = document.getElementById('myChart');
     let myPieChart = new Chart(ctx, {
@@ -85,6 +92,13 @@ export class HomepageComponent implements OnInit {
     let ctx = document.getElementById('myBar');
     let myBarChart = new Chart(ctx, {
       type: 'bar',
+      data: this.dataSource
+    });
+  }
+  createPolarArea(): void {
+    let ctx = document.getElementById('myPolarArea');
+    let myMixChart = new Chart(ctx, {
+      type: 'polarArea',
       data: this.dataSource
     });
   }
@@ -111,6 +125,7 @@ export class HomepageComponent implements OnInit {
   }
 
   openPie(): void {
+    this.deletePolarArea();
     this.deleteBar();
     this.deletePie();
     let pieObj = document.getElementById('holder')
@@ -128,6 +143,7 @@ export class HomepageComponent implements OnInit {
   }
 
   openBar(): void {
+    this.deletePolarArea();
     this.deletePie();
     this.deleteBar();
     let barObj = document.getElementById('holder')
@@ -142,5 +158,23 @@ export class HomepageComponent implements OnInit {
     barObj.appendChild(h1_node);
     barObj.appendChild(canvas_node);
     this.createBar();
+  }
+
+  openPolarArea(): void {
+    this.deletePie();
+    this.deleteBar();
+    this.deletePolarArea();
+    let barObj = document.getElementById('holder')
+      .appendChild(document.createElement('DIV'));
+    barObj.setAttribute('id', 'polarHolder');
+    let h1_node = document.createElement('H1');
+    h1_node.appendChild(document.createTextNode('Mix Chart'));
+    let canvas_node = document.createElement('CANVAS');
+    canvas_node.setAttribute('id', 'myPolarArea');
+    canvas_node.setAttribute('width', '400');
+    canvas_node.setAttribute('height', '400');
+    barObj.appendChild(h1_node);
+    barObj.appendChild(canvas_node);
+    this.createPolarArea();
   }
 }
