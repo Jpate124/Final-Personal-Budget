@@ -44,7 +44,7 @@ export class HomepageComponent implements OnInit {
       budget: ['']
     });
 
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'))[0].id;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser')).id;
     this.getBudgetData();
   }
 
@@ -98,7 +98,6 @@ export class HomepageComponent implements OnInit {
   }
 
   addEntry() {
-    console.log([this.addBudgetEntryForm.value, this.currentUser]);
     this.http.post('http://localhost:3000/add/budget', [this.addBudgetEntryForm.value, this.currentUser]).subscribe(
       data => {
           this.alertService.success('budgetAdded successful', true);

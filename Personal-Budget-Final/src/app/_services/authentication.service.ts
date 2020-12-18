@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import jwt_decode from 'jwt-decode';
 
 import { User } from '../_models/user/user.module';
+import { TokenRes } from '../_models/tokenres.module';
 
 @Injectable({
   providedIn: 'root'
@@ -27,13 +29,26 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
 }
   public login(username, password): Observable<User> {
-    return this.http.post<User>('http://localhost:3000/api/login', { username, password })
-        .pipe(map(user => {
+    return this.http.post('http://localhost:3000/api/login', { username, password })
+        .pipe(map((res: TokenRes) => {
+          console.log(res.token);
+          const data = this.getDecodeJWTToken(res.token);
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
-            return user;
+          localStorage.setItem('currentUser', JSON.stringify(data));
+          this.currentUserSubject.next(data);
+          return data;
         }));
+  }
+
+  private getDecodeJWTToken(token: any): any {
+    try{
+      const decodedToken = jwt_decode(token);
+      console.log(decodedToken);
+      return decodedToken;
+    }
+    catch(Error){
+        return null;
+    }
   }
 
   public logout(): void {

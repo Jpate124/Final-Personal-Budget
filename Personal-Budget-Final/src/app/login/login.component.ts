@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
+  hasError = false;
 
   constructor(
         private formBuilder: FormBuilder,
@@ -55,7 +56,14 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authenticationService.login(this.loginForm.get('username').value, this.loginForm.get('password').value)
         .subscribe(data => {
-                this.router.navigate([this.returnUrl]);
+                if (this.authenticationService.currentUserValue){
+                  this.router.navigate([this.returnUrl]);
+                  this.hasError = false;
+                }
+                else {
+                  this.hasError = true;
+                }
+
               },error => {
                 this.alertService.error(error);
                 this.loading = false;
