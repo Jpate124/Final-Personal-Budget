@@ -50,7 +50,7 @@ export class HomepageComponent implements OnInit {
 
   getBudgetData() {
     const data = {userId: this.currentUser};
-    this.http.post('http://localhost:3000/budget', data)
+    this.http.post('http://157.230.218.151:3000/budget', data)
     .subscribe((res: any) => {
 
       for (let i = 0; i < res.length; i++) {
