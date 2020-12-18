@@ -50,7 +50,7 @@ export class HomepageComponent implements OnInit {
 
   getBudgetData() {
     const data = {userId: this.currentUser};
-    this.http.post('http://157.230.218.151:3000/budget', data)
+    this.http.post('http://157.230.218.151:4000/budget', data)
     .subscribe((res: any) => {
 
       for (let i = 0; i < res.length; i++) {
@@ -112,7 +112,7 @@ export class HomepageComponent implements OnInit {
   }
 
   addEntry() {
-    this.http.post('http://157.230.218.151:3000/add/budget', [this.addBudgetEntryForm.value, this.currentUser]).subscribe(
+    this.http.post('http://157.230.218.151:4000/add/budget', [this.addBudgetEntryForm.value, this.currentUser]).subscribe(
       data => {
           this.alertService.success('budgetAdded successful', true);
           this.getBudgetData();
