@@ -4,7 +4,7 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const app = express();
-const port = process.env.port || 4000;
+const port = process.env.port || 3000;
 
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');

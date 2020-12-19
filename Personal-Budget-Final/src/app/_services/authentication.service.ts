@@ -29,7 +29,7 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
 }
   public login(username, password): Observable<User> {
-    return this.http.post('http://157.230.218.151:4000/api/login', { username, password })
+    return this.http.post('http://157.230.218.151:3000/api/login', { username, password })
         .pipe(map((res: TokenRes) => {
           console.log(res.token);
           const data = this.getDecodeJWTToken(res.token);
