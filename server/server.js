@@ -4,7 +4,8 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const app = express();
-const port = process.env.port || 3000;
+//const port = process.env.port || 3000;
+const port = 3000;
 
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
@@ -88,7 +89,7 @@ app.post('/api/login', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`API served at http://157.230.218.151:${port}`)
+    console.log(`${port}`)
 });
 
 
