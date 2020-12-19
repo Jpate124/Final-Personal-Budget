@@ -13,11 +13,19 @@ const exjwt = require('express-jwt');
 app.use(cors());
 app.use(bodyParser.json());
 
+// var connection = mysql.createConnection({
+//     host     : 'sql9.freemysqlhosting.net',
+//     user     : 'sql9381593',
+//     password : 'PU4nkd7EGd',
+//     database : 'sql9381593'
+// })
+
+
 var connection = mysql.createConnection({
     host     : 'sql9.freemysqlhosting.net',
-    user     : 'sql9381593',
-    password : 'PU4nkd7EGd',
-    database : 'sql9381593'
+    user     : 'sql9382960',
+    password : 'fUAGcUfqS8',
+    database : 'sql9382960'
 })
 
 const secretKey = 'My super secret key';
